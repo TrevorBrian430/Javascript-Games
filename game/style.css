@@ -1,0 +1,254 @@
+:root {
+    --primary-color: #6B4F4F;
+    --secondary-color: #EED6C4;
+    --accent-color: #A47551;
+    --bg-color: #FDF0E0;
+    --font-family: 'Arial', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: var(--primary-color);
+}
+
+#game-container {
+    width: 1200px;
+    height: 675px; /* 1200px / 16 * 9 */
+    background-color: #fff;
+    border: 5px solid var(--primary-color);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    box-sizing: border-box;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.screen.visible {
+    opacity: 1;
+}
+
+#game-screen {
+    justify-content: flex-start;
+    padding: 0;
+}
+
+#farm-scene {
+    width: 100%;
+    height: 100%;
+    background: #aae0a2 url('assets/farm_background.png') no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+/* Placeholder styling for farm background */
+#farm-scene {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: #fff;
+    text-shadow: 2px 2px 4px #000;
+    background-color: #8cbf86;
+    background-image: linear-gradient(to bottom, #a1d3b4, #77b789);
+}
+
+
+#instructions {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid var(--accent-color);
+}
+
+#progress-tracker {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid var(--accent-color);
+}
+#progress-tracker ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+#progress-tracker li.discovered {
+    text-decoration: line-through;
+    color: #888;
+}
+
+
+/* Hotspots and Drop Zones */
+.hotspot {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: rgba(255, 255, 0, 0.5);
+    border: 2px dashed #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.hotspot:hover {
+    background-color: rgba(255, 255, 0, 0.8);
+    transform: scale(1.1);
+}
+.hotspot.discovered {
+    background-color: rgba(0, 255, 0, 0.7);
+    border: 2px solid #fff;
+}
+.hotspot.discovered::after {
+    content: '✔️';
+    font-size: 40px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.drop-zone {
+    position: absolute;
+    border: 3px dashed var(--accent-color);
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: background-color 0.3s;
+}
+.drop-zone.over {
+    background-color: rgba(173, 216, 230, 0.7); /* Light blue */
+}
+.drop-zone.correct {
+    background-color: rgba(144, 238, 144, 0.8); /* Light green */
+    border: 3px solid green;
+}
+
+
+/* Labels Container (for Activity 2) */
+#labels-container {
+    position: absolute;
+    bottom: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: none; /* Initially hidden */
+}
+.draggable-label {
+    padding: 10px 20px;
+    background-color: var(--secondary-color);
+    border: 2px solid var(--primary-color);
+    border-radius: 5px;
+    cursor: grab;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+.draggable-label:active {
+    cursor: grabbing;
+}
+.draggable-label.dragging {
+    opacity: 0.5;
+}
+
+
+/* Modal styles */
+.modal {
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 3px solid var(--primary-color);
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+}
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+#modal-image {
+    max-width: 100%;
+    height: 200px;
+    margin-bottom: 15px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+}
+#prompt-answer.hidden {
+    display: none;
+}
+
+
+/* Buttons */
+button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px var(--primary-color);
+    transition: all 0.1s ease-in-out;
+    margin-top: 20px;
+}
+button:hover {
+    background-color: #c58c65;
+}
+button:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 var(--primary-color);
+}

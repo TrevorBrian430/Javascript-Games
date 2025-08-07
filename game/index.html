@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soil Conservation Adventure</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen visible">
+            <h1>🪨 Soil Conservation Measures</h1>
+            <p>“Hello Junior Farmers! Did you know that soil is like a sponge that holds food for plants? But when it's lost, growing crops becomes hard. In this lesson, we’ll discover smart ways to protect soil. Get ready to play, explore, and become a Soil Saver!”</p>
+            <button id="start-btn">Start Game</button>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen hidden">
+            <div id="farm-scene">
+                <!-- Hotspots for Activity 1 will be dynamically generated here -->
+                <!-- Drop Zones for Activity 2 will be dynamically generated here -->
+            </div>
+            <div id="instructions">
+                <p id="instruction-text">Welcome to the Smart Farm! 🌾 Click each area to uncover how farmers use clever methods to stop erosion.</p>
+            </div>
+            <div id="progress-tracker">
+                <h3>Soil Defenders Discovered:</h3>
+                <ul id="progress-list"></ul>
+            </div>
+            <div id="labels-container">
+                <!-- Draggable labels for Activity 2 will be dynamically generated here -->
+            </div>
+        </div>
+
+        <!-- Modal for Hotspot Info -->
+        <div id="info-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2 id="modal-title"></h2>
+                <div id="modal-body">
+                    <img id="modal-image" src="" alt="Soil Conservation Method" style="width:100%; height:auto;">
+                    <p id="modal-text"></p>
+                </div>
+                <div id="modal-prompt">
+                    <p id="prompt-question"></p>
+                    <button id="prompt-answer-btn">Click to Reveal</button>
+                    <p id="prompt-answer" class="hidden"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- End Screen -->
+        <div id="end-screen" class="screen hidden">
+            <h1>🌟 Well done, Soil Saver!</h1>
+            <p>You’ve explored, matched, and mastered the conservation tools that protect our farms. Healthy soil means healthy crops, healthy people, and a healthier planet. You can be a Soil Saver too!</p>
+            <button id="restart-btn">Play Again</button>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
